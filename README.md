@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Aegis 🛡️
+
+A premium fintech landing page built with Next.js 14, Tailwind CSS and Framer Motion.
+
+Aegis is a global money transfer platform — send money anywhere in the world instantly, at real exchange rates, with zero hidden fees.
+
+---
+
+## Tech Stack
+
+- **Next.js 14** — App Router
+- **Tailwind CSS** — styling + custom design tokens
+- **Framer Motion** — animations
+- **Inter** — via `next/font/google`
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Project Structure
 
-## Learn More
+```
+aegis/
+├── app/
+│   ├── globals.css
+│   ├── layout.js
+│   └── page.js
+└── components/
+    ├── Navbar.js
+    ├── Hero.js
+    ├── Ticker.js
+    ├── Stats.js
+    ├── Features.js
+    ├── HowItWorks.js
+    ├── Testimonials.js
+    ├── Pricing.js
+    ├── FAQ.js
+    ├── CTA.js
+    ├── Footer.js
+    ├── AnimatedSection.js
+    └── ProtectedButton.js
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Design System
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Custom Tailwind tokens:
 
-## Deploy on Vercel
+| Token | Value |
+|---|---|
+| `aegis-bg` | `#0C0A00` |
+| `aegis-surface` | `#131100` |
+| `aegis-gray` | `#8A8070` |
+| `aegis-white` | `#F5F0E0` |
+| `gold` | `#C6A84B` |
+| `gold-light` | `#E2C97E` |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Global CSS utilities: `.glass-card`, `.gradient-text`, `.gold-glow`, `.ticker-animate`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+
+## Features
+
+- Glassmorphism cards with gold glow
+- Scroll-triggered animations with blur filter
+- Shield pulse ring animation
+- Shimmer + border-draw button effects
+- Live currency ticker (12 currencies, seamless loop)
+- Floating dashboard mockup cards
+- Fully responsive — mobile menu included
+- Noise texture overlay
+- Custom gold scrollbar
+
+---
+
+## Scripts
+
+```bash
+npm run dev      # development
+npm run build    # production build
+npm run start    # start production server
+npm run lint     # lint
+```
