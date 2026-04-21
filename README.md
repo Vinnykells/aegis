@@ -43,15 +43,21 @@ A sophisticated dark-palette design system built to evoke trust and luxury.
 
 ### Hero
 
-![Aegis Hero](./screenshots/Aegis%20Heo.png)
+| Desktop | Mobile |
+|---|---|
+| ![Aegis Hero](./screenshots/Aegis%20Hero.png) | ![Aegis Hero Mobile](./screenshots/Aegis%20Hero%20Mobile.png) |
 
 ### User Onboarding Flow
 
-![Aegis Onboarding](./screenshots/Aegis%20onboarding.png)
+| Desktop | Mobile |
+|---|---|
+| ![Aegis Onboarding](./screenshots/Aegis%20onboarding.png) | ![Aegis Onboarding Mobile](./screenshots/Aegis%20onboarding%20Mobile.png) |
 
 ### Transparent Pricing
 
-![Aegis Pricing](./screenshots/Aegis%20Pricing.png)
+| Desktop | Mobile |
+|---|---|
+| ![Aegis Pricing](./screenshots/Aegis%20Pricing.png) | ![Aegis Pricing Mobile](./screenshots/Aegis%20Pricing%20Mobile.png) |
 
 ---
 
