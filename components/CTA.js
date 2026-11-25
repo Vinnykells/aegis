@@ -48,8 +48,8 @@ export default function CTA() {
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <ProtectedButton variant="primary">🛡️ Create free account</ProtectedButton>
-                <ProtectedButton variant="secondary">Talk to us →</ProtectedButton>
+                <ProtectedButton href="/signup" variant="primary">🛡️ Create free account</ProtectedButton>
+                <ProtectedButton href="mailto:hello@aegis.finance" variant="secondary">Talk to us →</ProtectedButton>
               </div>
 
               <div className="flex flex-wrap items-center justify-center gap-6 mt-12 pt-8 border-t border-gold/10">

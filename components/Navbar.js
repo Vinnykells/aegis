@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ProtectedButton from './ProtectedButton'
+import Link from 'next/link'
 
 const navLinks = [
   { label: 'Features', href: '#features' },
@@ -71,10 +72,10 @@ export default function Navbar() {
           </ul>
 
           <div className="hidden md:flex items-center gap-4">
-            <button className="text-sm text-aegis-gray hover:text-aegis-white transition-colors duration-200">
+            <Link href="/login" className="text-sm text-aegis-gray hover:text-aegis-white transition-colors duration-200">
               Log in
-            </button>
-            <ProtectedButton variant="primary">Get started free</ProtectedButton>
+            </Link>
+            <ProtectedButton href="/signup" variant="primary">Get started free</ProtectedButton>
           </div>
 
           <button className="md:hidden flex flex-col gap-1.5 z-50" onClick={() => setMenuOpen(!menuOpen)}>
@@ -108,7 +109,7 @@ export default function Navbar() {
               </motion.button>
             ))}
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-              <ProtectedButton variant="primary">Get started free</ProtectedButton>
+              <ProtectedButton href="/signup" variant="primary">Get started free</ProtectedButton>
             </motion.div>
           </motion.div>
         )}

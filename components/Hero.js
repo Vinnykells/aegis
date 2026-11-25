@@ -73,8 +73,8 @@ export default function Hero() {
 
             <motion.div custom={3} variants={shieldLock} initial="hidden" animate="visible"
               className="flex flex-col sm:flex-row gap-4 mb-12">
-              <ProtectedButton variant="primary">🛡️ Create free account</ProtectedButton>
-              <ProtectedButton variant="secondary">See how it works →</ProtectedButton>
+              <ProtectedButton href="/signup" variant="primary">🛡️ Create free account</ProtectedButton>
+              <ProtectedButton href="#how-it-works" variant="secondary">See how it works →</ProtectedButton>
             </motion.div>
 
             <motion.div custom={4} variants={shieldLock} initial="hidden" animate="visible"

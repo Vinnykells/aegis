@@ -121,6 +121,18 @@ aegis/
 
 Open [http://localhost:3000](http://localhost:3000) to see the result.
 
+### Backend Setup
+
+Copy `.env.example` to `.env.local` and fill in the Supabase keys you already use. Keep `SUPABASE_SERVICE_ROLE_KEY`, payment keys, and Resend keys server-only; never prefix those values with `NEXT_PUBLIC_`.
+
+Apply `supabase/migrations/20261124000002_consumer_wallets.sql` to enable the consumer Aegis product: profiles, personal wallets, virtual cards, transfers, savings goals, RLS, and existing-user backfill. This migration replaces the earlier organization-signup trigger with consumer account provisioning.
+
+`supabase/migrations/20261124000000_create_workspace_on_signup.sql` and `supabase/migrations/20261124000001_complete_payment_atomically.sql` are legacy work from the earlier multi-tenant direction. They are not used by the consumer wallet UI.
+
+In **Supabase Dashboard → Authentication → URL Configuration**, add both `http://localhost:3000/auth/callback` and your deployed URL followed by `/auth/callback` to the redirect allow list. This lets confirmed email links return users to their new dashboard.
+
+Configure payment providers to POST webhooks to `/api/webhooks/payments`. Paystack uses `x-paystack-signature`; Stripe uses `stripe-signature`. The webhook only accepts verified requests and ignores already-completed references.
+
 ---
 
 ## 🔗 Links

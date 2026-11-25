@@ -1,22 +1,18 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
-export default function ProtectedButton({ children, onClick, variant = 'primary', className = '' }) {
+export default function ProtectedButton({ children, href, onClick, variant = 'primary', className = '' }) {
   const isPrimary = variant === 'primary'
+  const classes = `relative inline-flex px-8 py-4 rounded-2xl text-sm font-semibold overflow-hidden group cursor-pointer ${
+    isPrimary
+      ? 'bg-gradient-to-r from-gold to-gold-light text-black'
+      : 'text-aegis-white border border-gold/20'
+  } ${className}`
 
-  return (
-    <motion.button
-      onClick={onClick}
-      className={`relative px-8 py-4 rounded-2xl text-sm font-semibold overflow-hidden group ${
-        isPrimary
-          ? 'bg-gradient-to-r from-gold to-gold-light text-black'
-          : 'text-aegis-white border border-gold/20'
-      } ${className}`}
-      whileHover="hover"
-      whileTap={{ scale: 0.97 }}
-      initial="rest"
-    >
+  const content = (
+    <>
       {!isPrimary && (
         <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
           <motion.rect
@@ -30,14 +26,14 @@ export default function ProtectedButton({ children, onClick, variant = 'primary'
         </svg>
       )}
 
-      <motion.div
+      <motion.span
         className={`absolute inset-0 rounded-2xl ${isPrimary ? 'bg-white/20' : 'bg-gold/5'}`}
         variants={{ rest: { opacity: 0 }, hover: { opacity: 1 } }}
         transition={{ duration: 0.2 }}
       />
 
       {isPrimary && (
-        <motion.div
+        <motion.span
           className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
           variants={{ rest: { x: '-100%' }, hover: { x: '200%' } }}
           transition={{ duration: 0.6, ease: 'easeInOut' }}
@@ -45,6 +41,27 @@ export default function ProtectedButton({ children, onClick, variant = 'primary'
       )}
 
       <span className="relative z-10 flex items-center gap-2">{children}</span>
+    </>
+  )
+
+  const animationProps = {
+    className: classes,
+    whileHover: 'hover',
+    whileTap: { scale: 0.97 },
+    initial: 'rest',
+  }
+
+  if (href) {
+    return (
+      <Link href={href} className="inline-flex">
+        <motion.span {...animationProps}>{content}</motion.span>
+      </Link>
+    )
+  }
+
+  return (
+    <motion.button {...animationProps} onClick={onClick}>
+      {content}
     </motion.button>
   )
 }
