@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import AnimatedSection from './AnimatedSection'
 
-const footerLinks = {
+const footerLinks: Record<string, string[]> = {
   Product: ['Features', 'Pricing', 'Security', 'Roadmap', 'API'],
   Company: ['About', 'Blog', 'Careers', 'Press', 'Contact'],
   Regions: ['North America', 'Europe', 'Asia Pacific', 'Middle East', 'Africa'],

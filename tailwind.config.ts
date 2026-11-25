@@ -1,10 +1,12 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from 'tailwindcss'
+
+const config: Config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -12,12 +14,12 @@ module.exports = {
       },
       colors: {
         aegis: {
-          bg:      '#0C0A00',
-          surface: '#131100',
-          card:    '#1A1700',
-          border:  '#2A2500',
-          gray:    '#8A8070',
-          white:   '#F5F0E0',
+          bg:      'var(--aegis-bg)',
+          surface: 'var(--aegis-surface)',
+          card:    'var(--aegis-card)',
+          border:  'var(--aegis-border)',
+          gray:    'var(--aegis-gray)',
+          white:   'var(--aegis-white)',
         },
         gold: {
           DEFAULT: '#C6A84B',
@@ -46,3 +48,5 @@ module.exports = {
   },
   plugins: [],
 }
+
+export default config

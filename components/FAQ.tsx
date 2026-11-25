@@ -4,7 +4,12 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import AnimatedSection from './AnimatedSection'
 
-const faqs = [
+interface FaqItem {
+  question: string
+  answer: string
+}
+
+const faqs: FaqItem[] = [
   {
     question: 'Which countries does Aegis support?',
     answer: 'Aegis currently supports 180+ countries worldwide including the US, UK, all EU countries, Canada, Australia, Japan, Singapore, UAE and many more. We are continuously expanding our coverage. Check our coverage page for the full list.',
@@ -36,7 +41,7 @@ const faqs = [
 ]
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState(null)
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
     <section id="faq" className="py-32 px-6 relative">

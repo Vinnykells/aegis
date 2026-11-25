@@ -1,12 +1,19 @@
-import { NextResponse } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 import { createClient } from '@/utils/supabase/server'
 
-export async function POST(request) {
+interface SavingsBody {
+  name?: unknown
+  targetAmount?: number | string
+  currency?: string
+  targetDate?: string | null
+}
+
+export async function POST(request: NextRequest) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Please sign in first.' }, { status: 401 })
 
-  const { name, targetAmount, currency = 'USD', targetDate } = await request.json()
+  const { name, targetAmount, currency = 'USD', targetDate } = (await request.json()) as SavingsBody
   const amount = Number(targetAmount)
 
   if (typeof name !== 'string' || name.trim().length < 2 || !Number.isFinite(amount) || amount <= 0) {

@@ -1,4 +1,14 @@
-export default function AuthFrame({ eyebrow, title, description, children, footer }) {
+import type { ReactNode } from 'react'
+
+interface AuthFrameProps {
+  eyebrow: string
+  title: string
+  description: string
+  children: ReactNode
+  footer: ReactNode
+}
+
+export default function AuthFrame({ eyebrow, title, description, children, footer }: AuthFrameProps) {
   return (
     <main className="min-h-screen bg-[#090b10] text-[#f7f8fa] lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.85fr)]">
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-12 sm:px-8 lg:px-16">

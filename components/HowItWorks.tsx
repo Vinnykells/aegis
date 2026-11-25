@@ -3,7 +3,15 @@
 import AnimatedSection from './AnimatedSection'
 import { motion } from 'framer-motion'
 
-const steps = [
+interface StepItem {
+  number: string
+  title: string
+  description: string
+  icon: string
+  color: string
+}
+
+const steps: StepItem[] = [
   { number: '01', title: 'Create your account', description: 'Sign up in 2 minutes. Email, password, done. No branch visits, no paperwork, no hassle. Available worldwide.', icon: '👤', color: 'border-blue-500/20 bg-blue-500/5' },
   { number: '02', title: 'Verify your identity', description: 'Quick KYC verification accepted globally. Upload your ID, take a selfie. Approved in minutes by our AI system.', icon: '✓', color: 'border-gold/20 bg-gold/5' },
   { number: '03', title: 'Add money', description: 'Fund your account via bank transfer, card or mobile money from anywhere in the world. Instant deposits, zero delays.', icon: '💰', color: 'border-green-500/20 bg-green-500/5' },
@@ -38,7 +46,7 @@ export default function HowItWorks() {
                 whileHover={{ y: -6, boxShadow: '0 0 40px rgba(198, 168, 75, 0.1)' }}
                 className="relative p-8 rounded-3xl glass-card h-full transition-all duration-300"
               >
-                <span className="absolute top-4 right-6 text-6xl font-black text-aegis-border select-none">{step.number}</span>
+                <span className="absolute top-4 right-6 text-6xl font-black text-aegis-border select-none opacity-60">{step.number}</span>
                 <div className={`w-14 h-14 rounded-2xl border ${step.color} flex items-center justify-center text-2xl mb-6`}>{step.icon}</div>
                 <h3 className="text-aegis-white font-bold text-lg mb-3">{step.title}</h3>
                 <p className="text-aegis-gray text-sm leading-relaxed">{step.description}</p>

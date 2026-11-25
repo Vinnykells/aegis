@@ -2,6 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Theme tokens ─────────────────────────────────────── */
+:root {
+  /* dark (default) */
+  --aegis-bg:      #0C0A00;
+  --aegis-surface: #131100;
+  --aegis-card:    #1A1700;
+  --aegis-border:  #2A2500;
+  --aegis-gray:    #8A8070;
+  --aegis-white:   #F5F0E0;
+
+  --glass-bg:      rgba(198, 168, 75, 0.03);
+  --glass-border:  rgba(198, 168, 75, 0.10);
+  --glass-inset:   rgba(198, 168, 75, 0.05);
+  --scrollbar-bg:  #0C0A00;
+}
+
+html.light {
+  --aegis-bg:      #FDFAF4;
+  --aegis-surface: #F5F0E6;
+  --aegis-card:    #EDE8DB;
+  --aegis-border:  #DDD6C7;
+  --aegis-gray:    #6B6050;
+  --aegis-white:   #1A1600;
+
+  --glass-bg:      rgba(198, 168, 75, 0.06);
+  --glass-border:  rgba(198, 168, 75, 0.20);
+  --glass-inset:   rgba(198, 168, 75, 0.08);
+  --scrollbar-bg:  #FDFAF4;
+}
+
+/* ── Base reset ───────────────────────────────────────── */
 * {
   margin: 0;
   padding: 0;
@@ -13,11 +44,13 @@ html {
 }
 
 body {
-  background-color: #0C0A00;
-  color: #F5F0E0;
+  background-color: var(--aegis-bg);
+  color: var(--aegis-white);
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* ── Utility classes ─────────────────────────────────── */
 .gradient-text {
   background: linear-gradient(135deg, #C6A84B 0%, #FFD700 50%, #E2C97E 100%);
   -webkit-background-clip: text;
@@ -31,13 +64,14 @@ body {
 }
 
 .glass-card {
-  background: rgba(198, 168, 75, 0.03);
+  background: var(--glass-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(198, 168, 75, 0.1);
-  box-shadow: 0 0 40px rgba(198, 168, 75, 0.05) inset;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 0 40px var(--glass-inset) inset;
 }
 
+/* ── Noise overlay ───────────────────────────────────── */
 body::before {
   content: '';
   position: fixed;
@@ -51,11 +85,13 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
+/* ── Scrollbar ───────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #0C0A00; }
+::-webkit-scrollbar-track { background: var(--scrollbar-bg); }
 ::-webkit-scrollbar-thumb { background: #C6A84B; border-radius: 2px; }
 ::selection { background: #C6A84B; color: #000; }
 
+/* ── Ticker animation ────────────────────────────────── */
 @keyframes ticker {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -67,4 +103,20 @@ body::before {
 
 .ticker-animate:hover {
   animation-play-state: paused;
+}
+
+/* ── Light mode overrides for inline hardcoded colours ── */
+/* Hero card section backgrounds */
+html.light .hero-action-btn {
+  color: var(--aegis-white) !important;
+}
+
+/* Pricing toggle track in light mode */
+html.light .pricing-toggle-off {
+  background-color: var(--aegis-border);
+}
+
+/* Section divider lines slightly stronger in light mode */
+html.light .section-line {
+  opacity: 0.15;
 }

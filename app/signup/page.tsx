@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, type FormEvent } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import AuthFrame from '@/components/AuthFrame'
@@ -10,12 +10,12 @@ export default function SignupPage() {
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState(null)
-  const [notice, setNotice] = useState(null)
+  const [error, setError] = useState<string | null>(null)
+  const [notice, setNotice] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  const handleSignup = async (event) => {
+  const handleSignup = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setLoading(true)
     setError(null)

@@ -5,7 +5,18 @@ import { motion } from 'framer-motion'
 import AnimatedSection from './AnimatedSection'
 import ProtectedButton from './ProtectedButton'
 
-const plans = [
+interface Plan {
+  name: string
+  price: { monthly: number; yearly: number }
+  description: string
+  border: string
+  badge: string | null
+  glow?: boolean
+  features: string[]
+  locked: string[]
+}
+
+const plans: Plan[] = [
   {
     name: 'Starter', price: { monthly: 0, yearly: 0 }, description: 'Perfect for getting started.',
     border: 'border-gold/10', badge: null,

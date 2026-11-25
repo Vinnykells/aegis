@@ -1,13 +1,21 @@
-import { NextResponse } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 import { getExchangeRate } from '@/utils/finance'
 import { createClient } from '@/utils/supabase/server'
 
-export async function POST(request) {
+interface TransferBody {
+  walletId?: string
+  recipientName?: unknown
+  recipientEmail?: unknown
+  destinationCurrency?: string
+  amount?: number | string
+}
+
+export async function POST(request: NextRequest) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Please sign in first.' }, { status: 401 })
 
-  const { walletId, recipientName, recipientEmail, destinationCurrency, amount } = await request.json()
+  const { walletId, recipientName, recipientEmail, destinationCurrency, amount } = (await request.json()) as TransferBody
   const transferAmount = Number(amount)
 
   if (!walletId || typeof recipientName !== 'string' || recipientName.trim().length < 2 || !destinationCurrency || !Number.isFinite(transferAmount) || transferAmount <= 0) {

@@ -1,14 +1,29 @@
 'use client'
 
+import type { MouseEventHandler, ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-export default function ProtectedButton({ children, href, onClick, variant = 'primary', className = '' }) {
+interface ProtectedButtonProps {
+  children: ReactNode
+  href?: string
+  onClick?: MouseEventHandler<HTMLButtonElement>
+  variant?: 'primary' | 'secondary'
+  className?: string
+}
+
+export default function ProtectedButton({
+  children,
+  href,
+  onClick,
+  variant = 'primary',
+  className = '',
+}: ProtectedButtonProps) {
   const isPrimary = variant === 'primary'
   const classes = `relative inline-flex px-8 py-4 rounded-2xl text-sm font-semibold overflow-hidden group cursor-pointer ${
     isPrimary
       ? 'bg-gradient-to-r from-gold to-gold-light text-black'
-      : 'text-aegis-white border border-gold/20'
+      : 'text-aegis-white border border-gold/20 hover:border-gold/40'
   } ${className}`
 
   const content = (
@@ -46,9 +61,9 @@ export default function ProtectedButton({ children, href, onClick, variant = 'pr
 
   const animationProps = {
     className: classes,
-    whileHover: 'hover',
+    whileHover: 'hover' as const,
     whileTap: { scale: 0.97 },
-    initial: 'rest',
+    initial: 'rest' as const,
   }
 
   if (href) {

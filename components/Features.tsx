@@ -3,7 +3,17 @@
 import AnimatedSection from './AnimatedSection'
 import { motion } from 'framer-motion'
 
-const features = [
+interface FeatureItem {
+  icon: string
+  title: string
+  description: string
+  gradient: string
+  border: string
+  iconBg: string
+  points: string[]
+}
+
+const features: FeatureItem[] = [
   {
     icon: '🌍', title: 'Global Transfers',
     description: 'Send money to 180+ countries in seconds. Real exchange rates, zero hidden fees, and instant delivery guaranteed worldwide.',

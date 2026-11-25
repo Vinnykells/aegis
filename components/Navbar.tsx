@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ProtectedButton from './ProtectedButton'
 import Link from 'next/link'
+import { useTheme } from './ThemeProvider'
 
 const navLinks = [
   { label: 'Features', href: '#features' },
@@ -11,6 +12,47 @@ const navLinks = [
   { label: 'Pricing', href: '#pricing' },
   { label: 'FAQ', href: '#faq' },
 ]
+
+function ThemeToggle() {
+  const { theme, toggle } = useTheme()
+  const isLight = theme === 'light'
+
+  return (
+    <motion.button
+      onClick={toggle}
+      whileHover={{ scale: 1.08 }}
+      whileTap={{ scale: 0.93 }}
+      aria-label="Toggle theme"
+      className="relative w-9 h-9 rounded-xl glass-card flex items-center justify-center text-aegis-gray hover:text-gold transition-colors duration-200"
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        {isLight ? (
+          <motion.span
+            key="moon"
+            initial={{ opacity: 0, rotate: -30, scale: 0.7 }}
+            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+            exit={{ opacity: 0, rotate: 30, scale: 0.7 }}
+            transition={{ duration: 0.2 }}
+            className="text-sm"
+          >
+            🌙
+          </motion.span>
+        ) : (
+          <motion.span
+            key="sun"
+            initial={{ opacity: 0, rotate: 30, scale: 0.7 }}
+            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+            exit={{ opacity: 0, rotate: -30, scale: 0.7 }}
+            transition={{ duration: 0.2 }}
+            className="text-sm"
+          >
+            ☀️
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </motion.button>
+  )
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -22,7 +64,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleNavClick = (href) => {
+  const handleNavClick = (href: string) => {
     setMenuOpen(false)
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
   }
@@ -71,18 +113,22 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
+            <ThemeToggle />
             <Link href="/login" className="text-sm text-aegis-gray hover:text-aegis-white transition-colors duration-200">
               Log in
             </Link>
             <ProtectedButton href="/signup" variant="primary">Get started free</ProtectedButton>
           </div>
 
-          <button className="md:hidden flex flex-col gap-1.5 z-50" onClick={() => setMenuOpen(!menuOpen)}>
-            <motion.span animate={menuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }} className="block w-6 h-0.5 bg-aegis-white origin-center" />
-            <motion.span animate={menuOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }} className="block w-6 h-0.5 bg-aegis-white" />
-            <motion.span animate={menuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }} className="block w-6 h-0.5 bg-aegis-white origin-center" />
-          </button>
+          <div className="flex md:hidden items-center gap-3">
+            <ThemeToggle />
+            <button className="flex flex-col gap-1.5 z-50" onClick={() => setMenuOpen(!menuOpen)}>
+              <motion.span animate={menuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }} className="block w-6 h-0.5 bg-aegis-white origin-center" />
+              <motion.span animate={menuOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }} className="block w-6 h-0.5 bg-aegis-white" />
+              <motion.span animate={menuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }} className="block w-6 h-0.5 bg-aegis-white origin-center" />
+            </button>
+          </div>
         </div>
       </motion.nav>
 

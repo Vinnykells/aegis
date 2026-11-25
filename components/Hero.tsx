@@ -1,22 +1,22 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import ProtectedButton from './ProtectedButton'
 
-const shieldLock = {
+const shieldLock: Variants = {
   hidden: { opacity: 0, scale: 0.8, filter: 'blur(10px)' },
-  visible: (i) => ({
+  visible: (i: number) => ({
     opacity: 1, scale: 1, filter: 'blur(0px)',
     transition: { type: 'spring', stiffness: 400, damping: 25, delay: i * 0.1 },
   }),
 }
 
-const fromLeft = {
+const fromLeft: Variants = {
   hidden: { x: -80, opacity: 0, filter: 'blur(8px)' },
   visible: { x: 0, opacity: 1, filter: 'blur(0px)', transition: { type: 'spring', stiffness: 300, damping: 25, delay: 0.8 } },
 }
 
-const fromRight = {
+const fromRight: Variants = {
   hidden: { x: 80, opacity: 0, filter: 'blur(8px)' },
   visible: { x: 0, opacity: 1, filter: 'blur(0px)', transition: { type: 'spring', stiffness: 300, damping: 25, delay: 1 } },
 }

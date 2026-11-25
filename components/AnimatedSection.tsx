@@ -1,13 +1,25 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { useRef, type ReactNode } from 'react'
+import { motion, useInView, type Variants } from 'framer-motion'
 
-export default function AnimatedSection({ children, className = '', delay = 0, direction = 'up' }) {
-  const ref = useRef(null)
+interface AnimatedSectionProps {
+  children: ReactNode
+  className?: string
+  delay?: number
+  direction?: 'up' | 'down' | 'left' | 'right'
+}
+
+export default function AnimatedSection({
+  children,
+  className = '',
+  delay = 0,
+  direction = 'up',
+}: AnimatedSectionProps) {
+  const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '0px 0px -40px 0px', amount: 0.1 })
 
-  const variants = {
+  const variants: Variants = {
     hidden: {
       opacity: 0,
       y: direction === 'up' ? 40 : direction === 'down' ? -40 : 0,

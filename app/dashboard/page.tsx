@@ -1,4 +1,5 @@
 import DashboardClient from '@/components/DashboardClient'
+import type { Card, Profile, SavingsGoal, Transfer, Wallet } from '@/types'
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 
@@ -15,12 +16,14 @@ export default async function DashboardPage() {
     supabase.from('cards').select('*').order('created_at').limit(1),
   ])
 
-  return <DashboardClient
-    userEmail={user.email}
-    profile={profileResult.data}
-    wallets={walletsResult.data || []}
-    transfers={transfersResult.data || []}
-    goals={goalsResult.data || []}
-    card={cardsResult.data?.[0] || null}
-  />
+  return (
+    <DashboardClient
+      userEmail={user.email ?? ''}
+      profile={(profileResult.data as Profile | null) ?? null}
+      wallets={(walletsResult.data as Wallet[] | null) ?? []}
+      transfers={(transfersResult.data as Transfer[] | null) ?? []}
+      goals={(goalsResult.data as SavingsGoal[] | null) ?? []}
+      card={(cardsResult.data?.[0] as Card | undefined) ?? null}
+    />
+  )
 }
